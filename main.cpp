@@ -12,14 +12,15 @@ int main()
     cv::Mat image=cv::imread(path);
 
     cv::Point2f rec1[4] = { {906, 960}, {1210, 640}, {1818, 982}, {1530, 1412} };
-    cv::Point2f dst1[4] = { {0.0f, 0.0f}, {w, 0.0f}, {w, h}, {0.0f, h} };
-    matx = cv::getPerspectiveTransform(rec1, dst1);
+    cv::Point2f dst[4] = { {0.0f, 0.0f}, {w, 0.0f}, {w, h}, {0.0f, h} };
+    matx = cv::getPerspectiveTransform(rec1, dst);
     cv::warpPerspective(image, imgWarp1, matx, cv::Point(w, h));
 
-    cv::Point2f rec2[4] = { {188, 1238}, {502, 734}, {874, 816}, {610, 1368} };
-    cv::Point2f dst2[4] = { {0.0f, 0.0f}, {h+20, 0.0f}, {h+20, w}, {0.0f, w} };
-    matx = cv::getPerspectiveTransform(rec2, dst2);
-    cv::warpPerspective(image, imgWarp2, matx, cv::Point(h+20, w));
+    cv::Point2f rec2[4] = { {373, 497}, {653, 313}, {977, 539}, {689, 758} };
+    matx = cv::getPerspectiveTransform(rec2, dst);
+    cv::warpPerspective(image, imgWarp2, matx, cv::Point(w, h));
+
+    cv::resize(image, image, cv::Size(854, 480));
 
     cv::imshow("SOURCE", image);
     cv::imshow("WARP 1", imgWarp1);
