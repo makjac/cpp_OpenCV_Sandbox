@@ -10,23 +10,29 @@ int main()
     cv::VideoCapture capture;
     cv::Mat frame, fgmask;
 
+    float img_data[9]={-1, -1, -1, -1, 9, -1, -1, -1, -1};
+    cv::Mat kernel = cv::Mat(3, 3, CV_32F, img_data);
+
     capture = cv::VideoCapture(0);
 
     if(!capture.isOpened())
         throw "Error when reading steam_avi";
 
     
-    cv::Ptr<cv::BackgroundSubtractor> mog = cv::bgsegm::createBackgroundSubtractorMOG();
+    //cv::Ptr<cv::BackgroundSubtractor> mog = cv::bgsegm::createBackgroundSubtractorMOG();
+    //cv::Ptr<cv::BackgroundSubtractor> mog = cv::createBackgroundSubtractorMOG2(500, 16.0, false);
+    cv::Ptr<cv::BackgroundSubtractor> mog = cv::createBackgroundSubtractorKNN(300, 1000.0, false);
 
     for(;;)
     {
         capture >> frame;
         cv::imshow("SOURCE", frame);
-        cv::GaussianBlur(frame, frame, cv::Size(3,3), 1, 1);
+        //cv::filter2D(frame, frame, -1, kernel, cv::Point(-1, -1), 0, cv::BORDER_DEFAULT);
+        cv::GaussianBlur(frame, frame, cv::Size(5,5), 1, 1);
         mog->apply(frame, fgmask);
         cv::imshow("MOG", fgmask);
-        cv::imshow("CANNY", frame);
-        cv::waitKey(1);
+        //cv::imshow("CANNY", frame);
+        cv::waitKey(10);
     }
 
 
