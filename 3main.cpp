@@ -13,7 +13,7 @@ int main()
     float img_data[9]={-1, -1, -1, -1, 9, -1, -1, -1, -1};
     cv::Mat kernel = cv::Mat(3, 3, CV_32F, img_data);
 
-    capture = cv::VideoCapture(0);
+    capture = cv::VideoCapture(path);
 
     if(!capture.isOpened())
         throw "Error when reading steam_avi";
