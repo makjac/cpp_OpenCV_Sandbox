@@ -29,6 +29,7 @@ int main()
 
     cv::namedWindow("SOURCE", 2);
     cv::setMouseCallback("SOURCE", CallBackFunc, &pick);
+
     for(;;)
     {
     cv::Scalar lower(pick.getH(false), pick.getS(false), pick.getV(false));

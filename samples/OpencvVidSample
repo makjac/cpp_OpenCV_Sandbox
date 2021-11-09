@@ -1,0 +1,23 @@
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/highgui.hpp>
+
+
+int main()
+{
+    std::string path = "video/street.mp4"; //path to movie file
+    cv::VideoCapture capture;
+    capture = cv::VideoCapture(path);//path = play movie file, 0 = play camera
+
+    if(!capture.isOpened())
+        throw "Error when reading steam_avi";
+    
+    for(;;)
+    {
+        capture >> frame;
+        cv::imshow("SOURCE", frame);
+        cv::waitKey(20);
+    }
+
+    return(0);
+}
