@@ -23,6 +23,12 @@ public:
     v=(int)img.at<cv::Vec3b>(y, x)[2];
     std::cout << h << " " << s << " " << v << std::endl;
     }
+
+    void setImage(cv::Mat image)
+    {
+        img = image;
+    }
+
     int getH(bool max)
     {
         if(max) 

@@ -32,7 +32,7 @@ int main()
         mog->apply(frame, fgmask);
         cv::imshow("MOG", fgmask);
         //cv::imshow("CANNY", frame);
-        cv::waitKey(10);
+        cv::waitKey(20);
     }
 
 
